@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../utils/constants.dart';
+
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
@@ -16,7 +18,7 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
   String? _selectedValue = 'Choose a Stock';
 
-  TextEditingController _percentController = TextEditingController();
+  final TextEditingController _percentController = TextEditingController();
   @override
   void initState() {
     _selectedValue = ref.read(trendingStocksProvider).first;
@@ -42,7 +44,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   child: Center(
                     child: Text(
                       textAlign: TextAlign.center,
-                      'Welcome to FinnHubTracker',
+                      Constants.welcomeTxt,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 35,
@@ -57,8 +59,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ),
                   child: Center(
                     child: Text(
+                      Constants.descriptionTxt,
                       textAlign: TextAlign.justify,
-                      'FinnHubTracker is your ultimate companion for monitoring and analyzing trades on Finnhub. Designed for traders, investors, and financial enthusiasts, our app provides real-time data, insightful analytics, and seamless tracking of your favorite stocks and market movements.',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -73,7 +75,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ),
                   child: Center(
                     child: Text(
-                      'Add an alert for a stock',
+                      Constants.addAlertTxt,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 24,
@@ -88,7 +90,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ),
                   child: Center(
                     child: Text(
-                      'Choose a stock in order to get notifications when its changes.',
+                      Constants.chooseStockTxt,
                       textAlign: TextAlign.justify,
                       style: TextStyle(
                         color: Colors.white,
@@ -108,7 +110,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                       labelStyle: TextStyle(
                         color: Colors.white,
                       ),
-                      labelText: 'Enter a price for alert',
+                      labelText: Constants.enterPriceAlertTxt,
                       suffixIcon: Icon(
                         Icons.percent,
                         color: Colors.white70,

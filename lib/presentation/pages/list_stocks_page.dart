@@ -1,19 +1,15 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:finnhub_project/presentation/controllers/list_stocks_page_controller.dart';
 import 'package:finnhub_project/presentation/providers/presentation_providers.dart';
+import 'package:finnhub_project/utils/constants.dart';
 import 'package:finnhub_project/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:http/http.dart' as http;
-import '../../domain/Models/quote/quote.dart';
 import '../../domain/Models/stock/stock.dart';
-import '../../utils/constants.dart';
 import '../widgets/stocks_chart.dart';
-import '../widgets/top_header_List_item_widget.dart';
 import '../widgets/top_header_list_widget.dart';
 
 class ListStockPage extends ConsumerStatefulWidget {
@@ -73,7 +69,7 @@ class _HomePageState extends ConsumerState<ListStockPage> {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                'Trending Stocks',
+                                Constants.trendingStockTxt,
                                 style: Styles.textStyleDropdownButton,
                               ),
                             ),
@@ -113,7 +109,7 @@ class _HomePageState extends ConsumerState<ListStockPage> {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                'Trending stocks chart',
+                                Constants.trendingStockBarCharTxt,
                                 style: Styles.textStyleDropdownButton,
                               ),
                             ),
@@ -145,7 +141,7 @@ class _HomePageState extends ConsumerState<ListStockPage> {
               }
             },
             error: (error, stackTrace) => Center(
-              child: Text('Something went wrong =( $error'),
+              child: Text('${Constants.somethingWentWrongTxt} : $error'),
             ),
             loading: () => const Center(
               child: CircularProgressIndicator(
