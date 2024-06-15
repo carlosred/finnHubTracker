@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "957951261557",
+    "project_id": "finnhubtracker",
+    "storage_bucket": "finnhubtracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957951261557:android:f561cd4bc3929773c6f13c",
+        "android_client_info": {
+          "package_name": "com.example.finnhub_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "957951261557-if1etlaii8qvq7roqrhlfh554f9kjnm3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDppkAtTJZ0WR7JQ9hzMHBF4152US8x3Ok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "957951261557-if1etlaii8qvq7roqrhlfh554f9kjnm3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,9 @@
+import 'package:finnhub_project/firebase_options.dart';
 import 'package:finnhub_project/presentation/pages/home_page.dart';
+import 'package:finnhub_project/presentation/pages/login_page.dart';
 import 'package:finnhub_project/services/local_notifications_service.dart';
 import 'package:finnhub_project/utils/styles.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +11,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Permission.notification.isDenied.then((value) {
     if (value) {
       Permission.notification.request();
@@ -46,7 +50,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const LoginPage(),
     );
   }
 }

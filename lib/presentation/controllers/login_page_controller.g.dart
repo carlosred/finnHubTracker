@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'list_stocks_page_controller.dart';
+part of 'login_page_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$listStockPageControllerHash() =>
-    r'00a2863c2fa805f9b583b14f8bd6c1ccf53d8655';
+String _$loginPageControllerHash() =>
+    r'8d3320a17f0da406ca849821130579c8566079fe';
 
-/// See also [ListStockPageController].
-@ProviderFor(ListStockPageController)
-final listStockPageControllerProvider =
-    AsyncNotifierProvider<ListStockPageController, Stream<dynamic>?>.internal(
-  ListStockPageController.new,
-  name: r'listStockPageControllerProvider',
+/// See also [LoginPageController].
+@ProviderFor(LoginPageController)
+final loginPageControllerProvider =
+    AsyncNotifierProvider<LoginPageController, User?>.internal(
+  LoginPageController.new,
+  name: r'loginPageControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$listStockPageControllerHash,
+      : _$loginPageControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$ListStockPageController = AsyncNotifier<Stream<dynamic>?>;
+typedef _$LoginPageController = AsyncNotifier<User?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

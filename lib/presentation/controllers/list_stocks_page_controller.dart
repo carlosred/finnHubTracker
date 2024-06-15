@@ -1,11 +1,7 @@
 import 'package:finnhub_project/presentation/providers/presentation_providers.dart';
 import 'package:finnhub_project/services/local_notifications_service.dart';
-import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-
-import '../../domain/Models/stock_stream_item/stock_stream_item.dart';
-import '../pages/helper_methods.dart';
 
 part 'list_stocks_page_controller.g.dart';
 
