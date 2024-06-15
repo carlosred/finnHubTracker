@@ -1,7 +1,9 @@
+import 'package:finnhub_project/data/providers/data_providers.dart';
 import 'package:finnhub_project/presentation/providers/presentation_providers.dart';
 import 'package:finnhub_project/services/local_notifications_service.dart';
+import 'package:finnhub_project/services/web_socket_service.dart';
+import 'package:finnhub_project/utils/constants.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
 part 'list_stocks_page_controller.g.dart';
 
@@ -15,20 +17,16 @@ class ListStockPageController extends _$ListStockPageController {
   Future<void> getStreamStocks() async {
     state = const AsyncLoading();
     try {
-      final wsUrl = Uri.parse(
-          'wss://ws.finnhub.io?token=cpjlpd1r01qs8l01hphgcpjlpd1r01qs8l01hpi0');
-      final channel = WebSocketChannel.connect(wsUrl);
+      final trendingStocks = ref.read(trendingStocksProvider);
 
-      await channel.ready;
+      final websocketService = ref.read(websocketsProvider.notifier).update(
+            (state) => WebSocketService(
+                Constants.websocketUrl, trendingStocks, (p0) => null),
+          );
 
-      var trendingStocks = ref.read(trendingStocksProvider);
+      await websocketService?.subscribeToTopic();
 
-      for (var value in trendingStocks) {
-        var msg = '{"type":"subscribe","symbol":"$value"}';
-        channel.sink.add(msg);
-      }
-
-      state = AsyncData(channel.stream.asBroadcastStream());
+      state = AsyncData(websocketService?.channel.stream.asBroadcastStream());
     } catch (error, stack) {
       state = AsyncError(error, stack);
     }

@@ -1,3 +1,4 @@
+import 'package:finnhub_project/core/routes/routes.dart';
 import 'package:finnhub_project/firebase_options.dart';
 import 'package:finnhub_project/presentation/pages/home_page.dart';
 import 'package:finnhub_project/presentation/pages/login_page.dart';
@@ -30,11 +31,10 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'FinnHubTracker',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           background: Styles.backgroundColor,
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      initialRoute: '/',
+      initialRoute: Routes.homeRoute,
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }

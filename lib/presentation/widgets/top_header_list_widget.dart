@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:finnhub_project/services/web_socket_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/Models/stock_stream_item/stock_stream_item.dart';
@@ -23,19 +22,23 @@ class TopHeaderListWidget extends StatefulWidget {
 
 class _TopHeaderListWidgetState extends State<TopHeaderListWidget>
     with AutomaticKeepAliveClientMixin {
-  var priceText;
-  var stockName;
-  final StreamController<dynamic> _streamController =
-      StreamController<dynamic>.broadcast();
+  String? priceText;
+  String? stockName;
+  late StreamController<dynamic> _streamController;
   @override
   void initState() {
-    _streamController.addStream(widget.stream);
+    _streamController = StreamController<dynamic>.broadcast();
+    if (!_streamController.isClosed) {
+      _streamController.addStream(widget.stream);
+    }
 
     super.initState();
   }
 
   @override
   void dispose() {
+    _streamController.close();
+
     super.dispose();
   }
 

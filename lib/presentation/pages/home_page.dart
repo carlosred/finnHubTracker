@@ -1,3 +1,4 @@
+import 'package:finnhub_project/core/routes/routes.dart';
 import 'package:finnhub_project/presentation/pages/List_stocks_page.dart';
 import 'package:finnhub_project/presentation/providers/presentation_providers.dart';
 import 'package:finnhub_project/utils/styles.dart';
@@ -28,12 +29,17 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     var trendingStock = ref.read(trendingStocksProvider);
-
-    return Scaffold(
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
         body: Container(
+          height: height,
+          width: width,
           decoration: Styles.backgroundGradient,
           child: Padding(
-            padding: const EdgeInsets.all(25.0),
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -147,13 +153,13 @@ class _HomePageState extends ConsumerState<HomePage> {
           onPressed: () {
             ref.read(stockSelectedToBeNotified.notifier).update((state) =>
                 {_selectedValue!: double.parse(_percentController.text)});
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const ListStockPage(),
-              ),
+            Navigator.of(context).pushNamed(
+              Routes.listStock,
             );
           },
           child: const Icon(Icons.check),
-        ));
+        ),
+      ),
+    );
   }
 }

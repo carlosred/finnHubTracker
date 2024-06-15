@@ -5,7 +5,7 @@ import 'package:finnhub_project/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../domain/Models/stock_stream_item/datum.dart';
+import '../../domain/Models/datum/datum.dart';
 
 class TopHeaderListItemWidget extends ConsumerStatefulWidget {
   const TopHeaderListItemWidget({
@@ -59,7 +59,7 @@ class _TopHeaderListItemWidgetState
 
   @override
   void didUpdateWidget(covariant TopHeaderListItemWidget oldWidget) {
-    if (widget.stockStreamItem!.type! != 'ping') {
+    if (widget.stockStreamItem!.type! == 'trade') {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         _updatePrices(oldWidget);
       });

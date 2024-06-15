@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'datum.dart';
+import '../datum/datum.dart';
 
 part 'stock_stream_item.g.dart';
 

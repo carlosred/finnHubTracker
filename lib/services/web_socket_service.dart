@@ -1,21 +1,24 @@
-import 'package:flutter/cupertino.dart';
+import 'package:finnhub_project/utils/constants.dart';
+import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class WebSocketService {
   late WebSocketChannel channel;
   Function(String) onMessage;
-  String stock;
+  List<String> stocks;
 
-  WebSocketService(String url, this.stock, this.onMessage) {
-    channel = WebSocketChannel.connect(Uri.parse(url));
+  WebSocketService(String url, this.stocks, this.onMessage) {
+    channel = WebSocketChannel.connect(Uri.parse(Constants.websocketUrl));
   }
 
-  void subscribeToTopic() {
-    final subscriptionMessage = '{"type":"subscribe","symbol":"$stock"}';
+  Future<void> subscribeToTopic() async {
+    await channel.ready;
 
-    channel.sink.add(subscriptionMessage);
-
-    debugPrint('suscribe it to $stock');
+    for (var value in stocks) {
+      var msg = '{"type":"subscribe","symbol":"$value"}';
+      channel.sink.add(msg);
+      debugPrint('suscribe it to $value');
+    }
   }
 
   void sendMessage(String message) {

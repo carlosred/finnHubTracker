@@ -5,6 +5,7 @@ import 'package:finnhub_project/presentation/providers/presentation_providers.da
 import 'package:finnhub_project/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../utils/utils.dart';
@@ -93,55 +94,82 @@ class _StockChartState extends ConsumerState<StockChart> {
 
   @override
   Widget build(BuildContext context) {
-    return BarChart(
-      swapAnimationCurve: Curves.easeInCirc,
-      swapAnimationDuration: Durations.extralong1,
-      BarChartData(
-        alignment: BarChartAlignment.spaceAround,
-        maxY: 80000,
-        barTouchData: barTouchData,
-        gridData: const FlGridData(show: false),
-        titlesData: FlTitlesData(
-          leftTitles:
-              const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-          rightTitles: const AxisTitles(
-            sideTitles: SideTitles(),
-          ),
-          topTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
-          ),
-          bottomTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 40,
-              getTitlesWidget: (value, meta) {
-                String? title =
-                    Utils.fixStockName(_mapPrices.keys.toList()[value.toInt()]);
-                return SideTitleWidget(
-                  axisSide: AxisSide.bottom,
-                  child: Text(
-                    title!,
-                    style: Styles.textstyleBarChartBottom,
-                  ),
-                );
-              },
-            ),
-          ),
-        ),
-        borderData: FlBorderData(show: false),
-        barGroups: _mapPrices.entries.map((entry) {
-          int index = _mapPrices.keys.toList().indexOf(entry.key);
-          return BarChartGroupData(
-            showingTooltipIndicators: [0],
-            x: index,
-            barRods: [
-              BarChartRodData(
-                toY: entry.value,
-                gradient: _barsGradient,
+    return Card(
+      elevation: 5,
+      color: Styles.backgroundColor.withOpacity(0.8),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      margin: const EdgeInsets.all(16),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            const Expanded(
+              flex: 2,
+              child: Row(
+                children: [
+                  Text('Stocks prices', style: Styles.textStyleDropdownButton),
+                ],
               ),
-            ],
-          );
-        }).toList(),
+            ),
+            const SizedBox(height: 16),
+            Expanded(
+              flex: 8,
+              child: BarChart(
+                swapAnimationCurve: Curves.easeInCirc,
+                swapAnimationDuration: Durations.extralong1,
+                BarChartData(
+                  alignment: BarChartAlignment.spaceAround,
+                  maxY: 80000,
+                  barTouchData: barTouchData,
+                  gridData: const FlGridData(show: false),
+                  titlesData: FlTitlesData(
+                    leftTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false)),
+                    rightTitles: const AxisTitles(
+                      sideTitles: SideTitles(),
+                    ),
+                    topTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 40,
+                        getTitlesWidget: (value, meta) {
+                          String? title = Utils.fixStockName(
+                              _mapPrices.keys.toList()[value.toInt()]);
+                          return SideTitleWidget(
+                            axisSide: AxisSide.bottom,
+                            child: Text(
+                              title!,
+                              style: Styles.textstyleBarChartBottom,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  borderData: FlBorderData(show: false),
+                  barGroups: _mapPrices.entries.map((entry) {
+                    int index = _mapPrices.keys.toList().indexOf(entry.key);
+                    return BarChartGroupData(
+                      showingTooltipIndicators: [0],
+                      x: index,
+                      barRods: [
+                        BarChartRodData(
+                          toY: entry.value,
+                          gradient: _barsGradient,
+                        ),
+                      ],
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -7,8 +7,6 @@ import '../../presentation/pages/login_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
-
     switch (settings.name) {
       case Routes.loginRoute:
         return MaterialPageRoute(
