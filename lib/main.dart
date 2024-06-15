@@ -1,7 +1,5 @@
 import 'package:finnhub_project/core/routes/routes.dart';
 import 'package:finnhub_project/firebase_options.dart';
-import 'package:finnhub_project/presentation/pages/home_page.dart';
-import 'package:finnhub_project/presentation/pages/login_page.dart';
 import 'package:finnhub_project/services/local_notifications_service.dart';
 import 'package:finnhub_project/utils/styles.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -52,7 +50,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      initialRoute: Routes.homeRoute,
+      initialRoute: Routes.loginRoute,
       onGenerateRoute: RouteGenerator.generateRoute,
     );
   }

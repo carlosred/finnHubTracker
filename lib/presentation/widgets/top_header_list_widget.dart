@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import '../../domain/Models/stock_stream_item/stock_stream_item.dart';
+
+import 'loader.dart';
 import 'top_header_List_item_widget.dart';
 
 class TopHeaderListWidget extends StatefulWidget {
@@ -52,14 +54,7 @@ class _TopHeaderListWidgetState extends State<TopHeaderListWidget>
       stream: _streamController.stream,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(
-                Color(0xff51B046),
-              ),
-              strokeWidth: 3,
-            ),
-          );
+          return const Loader();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (!snapshot.hasData) {

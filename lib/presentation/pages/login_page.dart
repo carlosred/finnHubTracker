@@ -1,8 +1,14 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:finnhub_project/core/routes/routes.dart';
 import 'package:finnhub_project/presentation/controllers/login_page_controller.dart';
+import 'package:finnhub_project/utils/constants.dart';
 import 'package:finnhub_project/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../utils/enum.dart';
+import '../widgets/login_button.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -26,46 +32,69 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    return PopScope(
-      canPop: false,
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: 3,
-          title: const Text('Login Page'),
-        ),
-        body: Container(
-          height: height,
-          width: width,
-          decoration: Styles.backgroundGradient,
-          child: Column(
-            children: [
-              const SizedBox(height: 20),
-              const Text(
-                'Welcome to Finnhub Trades Tracker',
-                style: Styles.textStyleTittle,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: width * 0.8,
-                height: height * 0.1,
-                child: ElevatedButton(
-                  style: const ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll(Styles.mainAppColor),
-                  ),
-                  onPressed: () async {
-                    await ref
-                        .read(loginPageControllerProvider.notifier)
-                        .loginWithGoogle();
-                  },
+    var loginPageController = ref.watch(loginPageControllerProvider);
+    return SafeArea(
+      child: PopScope(
+        canPop: false,
+        child: Scaffold(
+          body: Container(
+            height: height,
+            width: width,
+            decoration: Styles.backgroundGradient,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FadeInLeft(
+                  duration: const Duration(milliseconds: 1500),
                   child: const Text(
-                    'Login',
+                    Constants.welcomeTxt,
                     style: Styles.textStyleTittle,
+                    textAlign: TextAlign.center,
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 20),
+                loginPageController.when(
+                  data: (data) {
+                    if (data != null) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10.0,
+                        ),
+                        child: LoginButton(
+                          ref: ref,
+                          status: LoginStatus.success,
+                        ),
+                      );
+                    } else {
+                      return FadeInRight(
+                        duration: const Duration(milliseconds: 1500),
+                        child: LoginButton(
+                          ref: ref,
+                          status: LoginStatus.login,
+                          onPressed: () async {
+                            await ref
+                                .read(loginPageControllerProvider.notifier)
+                                .loginWithGoogle();
+                          },
+                        ),
+                      );
+                    }
+                  },
+                  error: (error, stack) => Text(
+                    '${Constants.somethingWentWrongTxt} : ${error.toString()}',
+                  ),
+                  loading: () => Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10.0,
+                    ),
+                    child: LoginButton(
+                      ref: ref,
+                      status: LoginStatus.loading,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

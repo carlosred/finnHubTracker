@@ -6,6 +6,7 @@ class Constants {
   static const descriptionTxt =
       'FinnHubTracker is your ultimate companion for monitoring and analyzing trades on Finnhub. Designed for traders, investors, and financial enthusiasts, our app provides real-time data, insightful analytics, and seamless tracking of your favorite stocks and market movements.';
   static const enterPriceAlertTxt = 'Enter a price for alert';
+  static const loginTxt = 'Log In';
   static const email = 'email';
   static const readOnly = 'https://www.googleapis.com/auth/contacts.readonly';
   static const trendingStockTxt = 'Trending Stocks';
@@ -14,4 +15,6 @@ class Constants {
   static const welcomeTxt = 'Welcome to FinnHubTracker';
   static const websocketUrl =
       'wss://ws.finnhub.io?token=cpjlpd1r01qs8l01hphgcpjlpd1r01qs8l01hpi0';
+
+  static const successfulLogin = 'Successful login';
 }

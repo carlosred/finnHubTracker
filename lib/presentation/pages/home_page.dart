@@ -1,5 +1,4 @@
 import 'package:finnhub_project/core/routes/routes.dart';
-import 'package:finnhub_project/presentation/pages/List_stocks_page.dart';
 import 'package:finnhub_project/presentation/providers/presentation_providers.dart';
 import 'package:finnhub_project/utils/styles.dart';
 import 'package:finnhub_project/utils/utils.dart';
@@ -31,133 +30,135 @@ class _HomePageState extends ConsumerState<HomePage> {
     var trendingStock = ref.read(trendingStocksProvider);
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    return PopScope(
-      canPop: false,
-      child: Scaffold(
-        body: Container(
-          height: height,
-          width: width,
-          decoration: Styles.backgroundGradient,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 25.0,
-                  ),
-                  child: Center(
-                    child: Text(
-                      textAlign: TextAlign.center,
-                      Constants.welcomeTxt,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 35,
-                        fontWeight: FontWeight.w700,
-                      ),
+    return SafeArea(
+      child: PopScope(
+        canPop: false,
+        child: Scaffold(
+          body: Container(
+            height: height,
+            width: width,
+            decoration: Styles.backgroundGradient,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 25.0,
                     ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10.0,
-                  ),
-                  child: Center(
-                    child: Text(
-                      Constants.descriptionTxt,
-                      textAlign: TextAlign.justify,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10.0,
-                  ),
-                  child: Center(
-                    child: Text(
-                      Constants.addAlertTxt,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 5.0,
-                  ),
-                  child: Center(
-                    child: Text(
-                      Constants.chooseStockTxt,
-                      textAlign: TextAlign.justify,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: TextField(
-                    controller: _percentController,
-                    keyboardType: TextInputType.number,
-                    style: Styles.textStyleDropdownButton,
-                    decoration: const InputDecoration(
-                      labelStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                      labelText: Constants.enterPriceAlertTxt,
-                      suffixIcon: Icon(
-                        Icons.percent,
-                        color: Colors.white70,
-                      ),
-                      border: UnderlineInputBorder(),
-                    ),
-                  ),
-                ),
-                Center(
-                  child: DropdownButton<String>(
-                    value: _selectedValue,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedValue = newValue;
-                      });
-                    },
-                    items: trendingStock
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          Utils.fixStockName(value)!,
-                          style: Styles.textStyleDropdownButton,
+                    child: Center(
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        Constants.welcomeTxt,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 35,
+                          fontWeight: FontWeight.w700,
                         ),
-                      );
-                    }).toList(),
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                  const Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 10.0,
+                    ),
+                    child: Center(
+                      child: Text(
+                        Constants.descriptionTxt,
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 10.0,
+                    ),
+                    child: Center(
+                      child: Text(
+                        Constants.addAlertTxt,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 5.0,
+                    ),
+                    child: Center(
+                      child: Text(
+                        Constants.chooseStockTxt,
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextField(
+                      controller: _percentController,
+                      keyboardType: TextInputType.number,
+                      style: Styles.textStyleDropdownButton,
+                      decoration: const InputDecoration(
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        ),
+                        labelText: Constants.enterPriceAlertTxt,
+                        suffixIcon: Icon(
+                          Icons.percent,
+                          color: Colors.white70,
+                        ),
+                        border: UnderlineInputBorder(),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: DropdownButton<String>(
+                      value: _selectedValue,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedValue = newValue;
+                        });
+                      },
+                      items: trendingStock
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            Utils.fixStockName(value)!,
+                            style: Styles.textStyleDropdownButton,
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            ref.read(stockSelectedToBeNotified.notifier).update((state) =>
-                {_selectedValue!: double.parse(_percentController.text)});
-            Navigator.of(context).pushNamed(
-              Routes.listStock,
-            );
-          },
-          child: const Icon(Icons.check),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              ref.read(stockSelectedToBeNotified.notifier).update((state) =>
+                  {_selectedValue!: double.parse(_percentController.text)});
+              Navigator.of(context).pushNamed(
+                Routes.listStock,
+              );
+            },
+            child: const Icon(Icons.check),
+          ),
         ),
       ),
     );
