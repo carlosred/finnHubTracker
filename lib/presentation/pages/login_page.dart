@@ -4,7 +4,6 @@ import 'package:finnhub_project/presentation/controllers/login_page_controller.d
 import 'package:finnhub_project/utils/constants.dart';
 import 'package:finnhub_project/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../utils/enum.dart';

@@ -1,5 +1,4 @@
 import 'package:finnhub_project/data/providers/data_providers.dart';
-import 'package:finnhub_project/presentation/providers/presentation_providers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

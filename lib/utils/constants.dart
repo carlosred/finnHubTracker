@@ -15,6 +15,6 @@ class Constants {
   static const welcomeTxt = 'Welcome to FinnHubTracker';
   static const websocketUrl =
       'wss://ws.finnhub.io?token=cpjlpd1r01qs8l01hphgcpjlpd1r01qs8l01hpi0';
-
+  static const emptyPricerAlertTxt = 'Please provide a value to track';
   static const successfulLogin = 'Successful login';
 }

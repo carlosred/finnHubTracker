@@ -1,5 +1,6 @@
 import 'package:finnhub_project/core/routes/routes.dart';
 import 'package:finnhub_project/presentation/providers/presentation_providers.dart';
+import 'package:finnhub_project/presentation/widgets/toast.dart';
 import 'package:finnhub_project/utils/styles.dart';
 import 'package:finnhub_project/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -151,11 +152,16 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              ref.read(stockSelectedToBeNotified.notifier).update((state) =>
-                  {_selectedValue!: double.parse(_percentController.text)});
-              Navigator.of(context).pushNamed(
-                Routes.listStock,
-              );
+              if (_percentController.text.isEmpty) {
+                Toast.showToast(
+                    context: context, message: Constants.emptyPricerAlertTxt);
+              } else {
+                ref.read(stockSelectedToBeNotified.notifier).update((state) =>
+                    {_selectedValue!: double.parse(_percentController.text)});
+                Navigator.of(context).pushNamed(
+                  Routes.listStock,
+                );
+              }
             },
             child: const Icon(Icons.check),
           ),
