@@ -81,8 +81,8 @@ class _TopHeaderListItemWidgetState
     }
 
     if (stockFromStream != null && mounted) {
-      var mapPrevious;
-      var oldListTrades;
+      Map<String, double> mapPrevious;
+      List<Datum>? oldListTrades;
       if (oldWidget.stockStreamItem!.type! != 'ping') {
         mapPrevious = ref.read(stocksPreviousPrices);
 
