@@ -6,7 +6,6 @@ class GoogleAuthOClient {
   Future<User?> loginWithGoogle() async {
     const List<String> scopes = <String>[
       Constants.email,
-      Constants.readOnly,
     ];
 
     GoogleSignIn googleSignIn = GoogleSignIn(

@@ -8,7 +8,6 @@ class Constants {
   static const enterPriceAlertTxt = 'Enter a price for alert';
   static const loginTxt = 'Log In';
   static const email = 'email';
-  static const readOnly = 'https://www.googleapis.com/auth/contacts.readonly';
   static const trendingStockTxt = 'Trending Stocks';
   static const trendingStockBarCharTxt = 'Trending stocks bar chart';
   static const somethingWentWrongTxt = 'Something went wrong =(';
