@@ -5,7 +5,7 @@ import 'package:finnhub_project/presentation/providers/presentation_providers.da
 import 'package:finnhub_project/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../utils/utils.dart';
@@ -28,7 +28,7 @@ class _StockChartState extends ConsumerState<StockChart> {
   Timer? _timer;
   Map<String, double> _mapPrices = {};
   String? getTitleFromValue(Map<String, double> map, double value) {
-    var result;
+    String? result;
     if (value != 0.0) {
       result = map.entries
           .firstWhere(

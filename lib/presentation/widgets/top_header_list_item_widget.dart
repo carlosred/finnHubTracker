@@ -1,11 +1,11 @@
-import 'package:finnhub_project/domain/Models/stock_stream_item/stock_stream_item.dart';
 import 'package:finnhub_project/presentation/providers/presentation_providers.dart';
 import 'package:finnhub_project/utils/styles.dart';
 import 'package:finnhub_project/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../domain/Models/datum/datum.dart';
+import '../../domain/models/datum/datum.dart';
+import '../../domain/models/stock_stream_item/stock_stream_item.dart';
 
 class TopHeaderListItemWidget extends ConsumerStatefulWidget {
   const TopHeaderListItemWidget({
@@ -14,7 +14,7 @@ class TopHeaderListItemWidget extends ConsumerStatefulWidget {
     required this.stock,
   });
 
-  final StockStreamItem? stockStreamItem;
+  final StockStreamItem stockStreamItem;
   final String stock;
 
   @override
@@ -59,7 +59,7 @@ class _TopHeaderListItemWidgetState
 
   @override
   void didUpdateWidget(covariant TopHeaderListItemWidget oldWidget) {
-    if (widget.stockStreamItem!.type! == 'trade') {
+    if (widget.stockStreamItem.type == 'trade') {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         _updatePrices(oldWidget);
       });
@@ -69,12 +69,12 @@ class _TopHeaderListItemWidgetState
   }
 
   void _updatePrices(covariant TopHeaderListItemWidget oldWidget) {
-    var listTrades = widget.stockStreamItem?.data!
+    var listTrades = widget.stockStreamItem.data!
         .where((element) => element.s == widget.stock)
         .toList();
 
     String? stockFromStream;
-    if ((listTrades!.isNotEmpty)) {
+    if ((listTrades.isNotEmpty)) {
       stockFromStream = listTrades.last.s;
     } else {
       stockFromStream = null;
@@ -83,13 +83,13 @@ class _TopHeaderListItemWidgetState
     if (stockFromStream != null && mounted) {
       Map<String, double> mapPrevious;
       List<Datum>? oldListTrades;
-      if (oldWidget.stockStreamItem!.type! != 'ping') {
+      if (oldWidget.stockStreamItem.type! != 'ping') {
         mapPrevious = ref.read(stocksPreviousPrices);
 
-        oldListTrades = oldWidget.stockStreamItem?.data!
+        oldListTrades = oldWidget.stockStreamItem.data!
             .where((element) => element.s == widget.stock)
             .toList();
-        var oldPrice = _getPrice(oldListTrades!);
+        var oldPrice = _getPrice(oldListTrades);
         if (oldPrice != null) mapPrevious[stockFromStream] = oldPrice;
         ref.read(stocksPreviousPrices.notifier).state = mapPrevious;
         priceText = _getPrice(listTrades).toString();

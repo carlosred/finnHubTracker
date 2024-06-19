@@ -3,8 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-import '../../domain/Models/stock_stream_item/stock_stream_item.dart';
-
+import '../../domain/models/stock_stream_item/stock_stream_item.dart';
 import 'loader.dart';
 import 'top_header_List_item_widget.dart';
 

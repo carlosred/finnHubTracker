@@ -6,6 +6,7 @@ import 'package:finnhub_project/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../utils/constants.dart';
 
@@ -23,6 +24,14 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   void initState() {
     _selectedValue = ref.read(trendingStocksProvider).first;
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await Permission.notification.isDenied.then((value) {
+        if (value) {
+          Permission.notification.request();
+        }
+      });
+    });
     super.initState();
   }
 

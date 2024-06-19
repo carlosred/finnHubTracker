@@ -43,7 +43,7 @@ dev_dependencies:
   riverpod_generator: ^2.3.5
 
 icons_launcher:
-  image_path: "assets/images/logo.png"
+  image_path: "assets/images/icon.png"
   adaptive_background_color: '#222222'
   platforms:
     android:
@@ -55,9 +55,9 @@ icons_launcher:
 
 flutter_native_splash:
   color: "#222222"
-  image: "assets/images/logo.png"
+  image: "assets/images/splash.jpg"
   android_12:
-    image: "assets/images/logo.png"
+    image: "assets/images/splash.jpg"
     color: "#222222"
 
     
